@@ -7,7 +7,7 @@
 #define SHM_SIZE 1000000 
 
 int main() {
-    key_t key = ftok("sender.c", 'R');
+    key_t key = ftok("senderSM.c", 'R');
     int shmid = shmget(key, SHM_SIZE, IPC_CREAT | 0666);
 
     if (shmid == -1) {
