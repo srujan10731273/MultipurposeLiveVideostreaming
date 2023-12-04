@@ -3,6 +3,7 @@
 #include<semaphore.h>
 #include<stdlib.h>
 #include<fcntl.h>
+#include<stdint.h>
 #include<unistd.h>
 // Video resolution
 #define W 1280
@@ -11,9 +12,9 @@ sem_t semaphore;
 // Allocate a buffer to store one frame
 unsigned char frame[H][W][3] = {0};
 
-void* colorinvert()
+void* colorInvert()
 {
-    int x, y, count;
+    uint32_t x, y, count;
     sem_wait(&semaphore);
     // Open an input pipe from ffmpeg and an output pipe to a second instance of ffmpeg
     FILE *pipein = popen("ffmpeg -i camera_output.mp4 -f image2pipe -vcodec rawvideo -pix_fmt rgb24 -", "r");
@@ -62,9 +63,9 @@ void* colorinvert()
    }
 
 //for image resolution
-void* resolution()
+void* Resolution()
 {
-   int x, y, count;
+   uint32_t x, y, count;
    int Height,Width;
    sem_wait(&semaphore);
     printf("enter the detailes to change the resoultion i.e height and width\n");
@@ -116,11 +117,11 @@ int main()
 {
   sem_init(&semaphore,0,1);
   pthread_t thread_id1,thread_id2,thread_id3;
-   //thread creation for color inversion
-  pthread_create(&thread_id1,NULL,colorinvert,NULL);
+  //thread creation for color inversion
+  pthread_create(&thread_id1,NULL,colorInvert,NULL);
   pthread_join(thread_id1,NULL);
   //thread creation for changing the resolution
-  pthread_create(&thread_id2,NULL,resolution,NULL);
+  pthread_create(&thread_id2,NULL,Resolution,NULL);
   pthread_join(thread_id2,NULL);
   //creation of thread for image stabilization
   pthread_create(&thread_id3,NULL,image_stabilization,NULL);
