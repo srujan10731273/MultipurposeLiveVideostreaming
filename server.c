@@ -9,7 +9,7 @@
 void error_handler(char *message) 
  {
   perror(message);
-  exit(1); // process termination
+  exit(1); 
  }
 
 void receive_file(FILE *file, int socket)
