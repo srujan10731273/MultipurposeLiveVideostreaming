@@ -20,25 +20,17 @@ void send_file(FILE *file, int socket, struct sockaddr_in server_address,socklen
 {
   char buffer[MAX_BUFFER_SIZE];
   size_t bytesRead;
-  // size_t fread(void *ptr, size_t size, size_t nmemb, FILE *stream)
-  // reading 1 byte of data at a time from the file and storing it into
-  // character buffer
-  //memset(buffer,0,sizeof(buffer));
+  // size_t 
+  // reading 1 byte of data at a time from the file and storing it into character buffer
+
   while ((bytesRead = fread(buffer,1, sizeof(buffer),file))>0) // fp is the file pointer
   {
-    /*ssize_t sendto(intsockfd, const void *buf, size_t len,int flags,const
-     * struct sockaddr *dest_addr, socklen_taddrlen);*/
-    /*The sendto() function shall send a message through a connection-mode or
-     * connectionless-mode socket. If the socket is connectionless-mode, the
-     * message shall be sent to the address specified by dest_addr. If the
-     * socket is connection-mode, dest_addr shall be ignored. */
+    /
     if (sendto(socket, buffer, bytesRead, 0,(struct sockaddr *)&server_address,server_address_len) == -1) 
     {
       error_handler("sendto() failed");
     }
-    /* while loop continuously read the data from the file and store it in a
-     * temporary file, from the buffer it is sending the data to the destination
-     * server till the EOF */
+   
      
   }
 
