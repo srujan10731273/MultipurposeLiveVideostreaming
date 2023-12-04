@@ -11,7 +11,7 @@ sem_t semaphore;
 // Allocate a buffer to store one frame
 unsigned char frame[H][W][3] = {0};
 
-void* colorinvert()
+void* colorInvert()
 {
     int x, y, count;
     sem_wait(&semaphore);
@@ -62,7 +62,7 @@ void* colorinvert()
    }
 
 //for image resolution
-void* resolution()
+void* Resolution()
 {
    int x, y, count;
    int Height,Width;
@@ -117,10 +117,10 @@ int main()
   sem_init(&semaphore,0,1);
   pthread_t thread_id1,thread_id2,thread_id3;
    //thread creation for color inversion
-  pthread_create(&thread_id1,NULL,colorinvert,NULL);
+  pthread_create(&thread_id1,NULL,colorInvert,NULL);
   pthread_join(thread_id1,NULL);
   //thread creation for changing the resolution
-  pthread_create(&thread_id2,NULL,resolution,NULL);
+  pthread_create(&thread_id2,NULL,Resolution,NULL);
   pthread_join(thread_id2,NULL);
   //creation of thread for image stabilization
   pthread_create(&thread_id3,NULL,image_stabilization,NULL);
