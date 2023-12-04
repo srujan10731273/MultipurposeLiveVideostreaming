@@ -22,7 +22,8 @@ all:
 	./camencom
 	./droencom
 	./webencom
-	./server
-	./client
+	./server camera_server_out.mp4 drone_server_out.mp4 webCam_server_out.mp4 2000
+	./client camera_compressed.mp4 drone_compressed.mp4 webCam_compressed.mp4 127.0.0.1 2000
+	mplayer -vo caca camera_server_out.mp4 drone_server_out.mp4 webCam_server_out.mp4
 	
 	
