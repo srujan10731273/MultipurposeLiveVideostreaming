@@ -7,7 +7,7 @@ int main() {
   int k = 0;
   while (1) {
     printf("\nEnter choice\n1. Camera frames\n2. Drone frames "
-           "3. WebCam frames\n4. Camera color invert and resolution\n5. Drone color invert and resolution\n6. WebCam color invert and resolution\n7. Object detection\n8. Camera encoding and compression\n9. Drone encoding and compression\n10. WebCam encoding and compression\n11. Send through client socket\n12. Receive through socket\n13. Exit\n ");
+           "3. WebCam frames\n4. Camera color invert and resolution\n5. Drone color invert and resolution\n6. WebCam color invert and resolution\n7. Object detection\n8. Camera encoding and compression\n9. Drone encoding and compression\n10. WebCam encoding and compression\n11.  Server socket\n12. Receive socket\n13. Exit\n ");
     scanf("%d", &choice);
     printf("\n\n");
     do{
@@ -53,11 +53,11 @@ int main() {
       break;
       
     case 11:
-      execvp("./client", NULL);
+      execvp("./server", NULL);
       break;
       
     case 12:
-      execvp("./server", NULL);
+      execvp("./client", NULL);
       break;
       
     case 13:
