@@ -66,9 +66,9 @@ void* colorInvert()
 //for image resolution
 void* resolution()
 {
-    uint16_t x, y;
+    uint16_t x, y,Height,Width;
     unit32_t count;
-    int Height,Width;
+   
     sem_wait(&semaphore);
     printf("enter the detailes to change the resoultion i.e height and width\n");
     scanf("%d %d",&Height,&Width);
