@@ -2,6 +2,7 @@
 #include<pthread.h>
 #include<sys/types.h>
 #include<semaphore.h>
+#include<stdint.h>
 #include<stdlib.h>
 #include<fcntl.h>
 #include<unistd.h>
@@ -11,8 +12,9 @@
 sem_t semaphore;
 // Allocate a buffer to store one frame
 unsigned char frame[H][W][3] = {0};
-void* colorinvert(){
-   int x, y, count;
+void* colorInvert(){
+    uint16_t x, y;
+    uint32_t count;
     sem_wait(&semaphore);
     // Open an input pipe from ffmpeg and an output pipe to a second instance of ffmpeg
     FILE *pipein = popen("ffmpeg -i drone_output.mp4 -f image2pipe -vcodec rawvideo -pix_fmt rgb24 -", "r");
@@ -61,8 +63,8 @@ void* colorinvert(){
 
 //for image resolution
 void* resolution(){
-   int x, y, count;
-   int Height,Width;
+   uint16_t x, y, Height,Width; 
+   uint32_t count;
    sem_wait(&semaphore);
     printf("enter the detailes to change the resoultion i.e height and width\n");
     scanf("%d %d",&Height,&Width);
@@ -112,7 +114,7 @@ int main()
   sem_init(&semaphore,0,1);
   pthread_t thread_id1,thread_id2,thread_id3;
   //thread creation for color inversion
-  pthread_create(&thread_id1,NULL,colorinvert,NULL);
+  pthread_create(&thread_id1,NULL,colorInvert,NULL);
   pthread_join(thread_id1,NULL);
   //thread creation for changing the resolution
   pthread_create(&thread_id2,NULL,resolution,NULL);
