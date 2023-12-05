@@ -43,7 +43,7 @@ int main()
 void *encodeVideo(void *arg) 
 {
    
-    system("ffmpeg -i camera_ResolutionOutput.mp4 -c:v libx264 -crf 23 -c:a aac -strict experimental -b:a 128k camera_encoded.mp4");
+    system("ffmpeg -i camera_ResolutionOutput.mp4 -c:v libx264 -crf 23 camera_encoded.mp4");
     
     printf("camera frames are encoding\n");
     sleep(2);
@@ -57,7 +57,7 @@ void *compressVideo(void *arg)
 {
     // Wait for the encoding process to finish
      sem_wait(&semaphore);
-     system("ffmpeg -i camera_encoded.mp4 -c:v libx265 -crf 28 -c:a aac -strict experimental -b:a 128k camera_compressed.mp4");
+     system("ffmpeg -i camera_encoded.mp4 -c:v libx265 -crf 28 camera_compressed.mp4");
      printf("camera encoded frames are compressing\n");
      sleep(2);
      system("mplayer camera_compressed.mp4");
