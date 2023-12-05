@@ -14,7 +14,8 @@ unsigned char frame[H][W][3] = {0};
 
 void* colorInvert()
 {
-    uint32_t x, y, count;
+    uint16_t x, y;
+    unit32_t count;
     sem_wait(&semaphore);
     // Open an input pipe from ffmpeg and an output pipe to a second instance of ffmpeg
     FILE *pipein = popen("ffmpeg -i camera_output.mp4 -f image2pipe -vcodec rawvideo -pix_fmt rgb24 -", "r");
@@ -63,11 +64,12 @@ void* colorInvert()
    }
 
 //for image resolution
-void* Resolution()
+void* resolution()
 {
-   uint32_t x, y, count;
-   int Height,Width;
-   sem_wait(&semaphore);
+    uint16_t x, y;
+    unit32_t count;
+    int Height,Width;
+    sem_wait(&semaphore);
     printf("enter the detailes to change the resoultion i.e height and width\n");
     scanf("%d %d",&Height,&Width);
     // Open an input pipe from ffmpeg and an output pipe to a second instance of ffmpeg
@@ -121,7 +123,7 @@ int main()
   pthread_create(&thread_id1,NULL,colorInvert,NULL);
   pthread_join(thread_id1,NULL);
   //thread creation for changing the resolution
-  pthread_create(&thread_id2,NULL,Resolution,NULL);
+  pthread_create(&thread_id2,NULL,resolution,NULL);
   pthread_join(thread_id2,NULL);
   //creation of thread for image stabilization
   pthread_create(&thread_id3,NULL,image_stabilization,NULL);
