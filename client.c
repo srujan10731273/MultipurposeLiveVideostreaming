@@ -55,7 +55,7 @@ int main(int argc, char *argv[]) {
   int server_port = atoi(argv[5]); // port number converted into integer
 
   fp1 = fopen(filename1,"rb"); // Open for reading in binary mode, filename will be given
-                    // as a comment line argument(Eg. video.mp4)
+                  
   fp2 = fopen(filename2,"rb"); 
   fp3 = fopen(filename3,"rb"); 
   if(!fp1 || !fp2 || !fp3)
@@ -75,23 +75,17 @@ int main(int argc, char *argv[]) {
   // Set up the server address structure
   struct sockaddr_in server_address;
   memset(&server_address,0,sizeof(server_address)); // clearing the memory space of server_address
-                                  // variable
+                              
   server_address.sin_family = AF_INET;
   server_address.sin_addr.s_addr = inet_addr(server_ip); 
-  /* inter_addr :function converts the Internet host address
-     server_ip from IPv4 numbers-and-dots notation into binary
-     data in network byte order */
   // server_ip can be given as 127.0.0.1 for the local host (Given as command
   // line argument)
-  server_address.sin_port = htons(server_port); /*The htons() function converts the unsigned short integer
-                       hostshort from host byte order to network byte order */
+  server_address.sin_port = htons(server_port);
 
   // Send the file
   send_file(fp1, udp_socket, server_address,sizeof(server_address)); // calling the defined function
-  /* function will transfer the file pointed by file pointer fp to the
-   * server_address through UDP socket */
-   send_file(fp2,udp_socket,server_address,sizeof(server_address));
-   send_file(fp3,udp_socket,server_address,sizeof(server_address));         
+  send_file(fp2,udp_socket,server_address,sizeof(server_address));
+  send_file(fp3,udp_socket,server_address,sizeof(server_address));         
 
   fclose(fp1);  
   fclose(fp2);  
