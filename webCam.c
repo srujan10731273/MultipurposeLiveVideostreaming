@@ -1,6 +1,8 @@
 #include <stdio.h>
-#include<stdlib.h>
-#include<unistd.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <stdint.h>
+
 // Video resolution
 #define Width 480
 #define Height 864
@@ -10,7 +12,8 @@ unsigned char frame[Height][Width][3] = {0};
 
 int main()
 {
-    int x, y, count;
+    uint16_t x, y;
+    uint32_t count;
 
     // Open an input pipe from ffmpeg and an output pipe to a second instance of ffmpeg
     FILE *pipein = popen("ffmpeg -i webCam.mp4 -f image2pipe -vcodec rawvideo -pix_fmt rgb24 -", "r");
