@@ -57,7 +57,7 @@ void *compressVideo(void *arg)
 {
     // Wait for the encoding process to finish
      sem_wait(&semaphore);
-     system("ffmpeg -i camera_encoded.mp4 -c:v libx265 -crf 28 camera_compressed.mp4");
+     system("ffmpeg -i camera_encoded.mp4 -c:v libx265 -crf 23 camera_compressed.mp4");
      printf("camera encoded frames are compressing\n");
      sleep(2);
      system("mplayer camera_compressed.mp4");
