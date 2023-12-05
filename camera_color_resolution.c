@@ -11,7 +11,27 @@
 sem_t semaphore;
 // Allocate a buffer to store one frame
 unsigned char frame[H][W][3] = {0};
+void* colorInvert();
+void* resolution();
+void* image_stabilization();
 
+//Main function
+int main()
+{
+  sem_init(&semaphore,0,1);
+  pthread_t thread_id1,thread_id2,thread_id3;
+  //thread creation for color inversion
+  pthread_create(&thread_id1,NULL,colorInvert,NULL);
+  pthread_join(thread_id1,NULL);
+  //thread creation for changing the resolution
+  pthread_create(&thread_id2,NULL,resolution,NULL);
+  pthread_join(thread_id2,NULL);
+  //creation of thread for image stabilization
+  pthread_create(&thread_id3,NULL,image_stabilization,NULL);
+  pthread_join(thread_id3,NULL);
+  
+  return 0;
+}
 void* colorInvert()
 {
     uint16_t x, y;
@@ -110,24 +130,8 @@ void* resolution()
 }
 
 //Image Stabilization
-void* image_stabilization(){
+void* image_stabilization()
+{
       printf("Image stabilisation is not possible\n");
 }
 
-//Main function
-int main()
-{
-  sem_init(&semaphore,0,1);
-  pthread_t thread_id1,thread_id2,thread_id3;
-  //thread creation for color inversion
-  pthread_create(&thread_id1,NULL,colorInvert,NULL);
-  pthread_join(thread_id1,NULL);
-  //thread creation for changing the resolution
-  pthread_create(&thread_id2,NULL,resolution,NULL);
-  pthread_join(thread_id2,NULL);
-  //creation of thread for image stabilization
-  pthread_create(&thread_id3,NULL,image_stabilization,NULL);
-  pthread_join(thread_id3,NULL);
-  
-  return 0;
-}
