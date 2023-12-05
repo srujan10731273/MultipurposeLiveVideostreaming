@@ -32,6 +32,7 @@ int main()
   
   return 0;
 }
+//color Inversion
 void* colorInvert()
 {
     uint16_t x, y;
