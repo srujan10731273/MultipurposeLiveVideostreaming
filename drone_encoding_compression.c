@@ -57,7 +57,7 @@ void *compressVideo(void *arg)
 {
     // Wait for the encoding process to finish
     sem_wait(&semaphore);
-    system("ffmpeg -i drone_encoded.mp4 -c:v libx265 -crf 28 -c:a aac -strict experimental -b:a 128k drone_compressed.mp4");
+    system("ffmpeg -i drone_encoded.mp4 -c:v libx264 -crf 23 drone_compressed.mp4");
     printf("Drone encoded frames are compressed\n");
     sleep(2);  
     system("mplayer drone_compressed.mp4");
