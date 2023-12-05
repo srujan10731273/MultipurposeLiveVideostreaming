@@ -43,7 +43,7 @@ int main()
 void *encodeVideo(void *arg) 
 {
    
-    system("ffmpeg -i webCam_ResolutionOutput.mp4 -c:v libx264 -crf 23 -c:a aac -strict experimental -b:a 128k webCam_encoded.mp4");
+    system("ffmpeg -i webCam_ResolutionOutput.mp4 -c:v libx264 -crf 23 webCam_encoded.mp4");
 
     printf("Webcam frames are encoding\n");
     sleep(2);
@@ -57,7 +57,7 @@ void *compressVideo(void *arg)
 {
     // Wait for the encoding process to finish
      sem_wait(&semaphore);
-     system("ffmpeg -i webCam_encoded.mp4 -c:v libx265 -crf 28 webCam_compressed.mp4");
+     system("ffmpeg -i webCam_encoded.mp4 -c:v libx264 -crf 23 webCam_compressed.mp4");
      printf("Webcam encoded frames are compressed\n");
      sleep(2);
      system("mplayer webCam_compressed.mp4");
