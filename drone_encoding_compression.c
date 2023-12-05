@@ -43,7 +43,7 @@ int main()
 void *encodeVideo(void *arg) 
 {
    
-    system("ffmpeg -i drone_ResolutionOutput.mp4 -c:v libx264 -crf 23 -c:a aac -strict experimental -b:a 128k drone_encoded.mp4");
+    system("ffmpeg -i drone_ResolutionOutput.mp4 -c:v libx264 -crf 23 drone_encoded.mp4");
 
     printf("Drone frames are enconding\n");
     sleep(2);
